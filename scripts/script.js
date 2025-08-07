@@ -6,6 +6,10 @@ $(document).ready(function () {
 
   const flipDuration = 600; // Duración de la animación CSS
 
+  // Referencias a los sonidos
+  const failSound = document.getElementById("failSound");
+  const matchSound = document.getElementById("matchSound");
+
   function generateBoard(size) {
     currentSize = size;
     const $board = $("#boardGame");
@@ -92,11 +96,20 @@ $(document).ready(function () {
         // Match
         selectedCards.forEach(($c) => $c.addClass("matched"));
         matchedCards.push(val1);
+
+        // Sonido de acierto
+        matchSound.currentTime = 0;
+        matchSound.play();
+
         selectedCards = [];
       } else {
         // Fail
         failures++;
         $("#failures").text(`Fails: ${failures}`);
+
+        // Sonido de fallo
+        failSound.currentTime = 0;
+        failSound.play();
 
         $("#boardGame").addClass("disabled");
 
