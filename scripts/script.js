@@ -74,6 +74,15 @@ $(document).ready(function () {
     }
   });
 
+  function playTwice(sound) {
+    sound.currentTime = 0;
+    sound.play();
+    setTimeout(() => {
+      sound.currentTime = 0;
+      sound.play();
+    }, sound.duration * 1000 + 100);
+  }
+
   $("#boardGame").on("click", ".card", async function () {
     const $card = $(this);
 
@@ -98,8 +107,7 @@ $(document).ready(function () {
         matchedCards.push(val1);
 
         // Sonido de acierto
-        matchSound.currentTime = 0;
-        matchSound.play();
+        playTwice(matchSound);
 
         selectedCards = [];
       } else {
