@@ -8,6 +8,23 @@
 body {
   overflow-x: hidden;
   width: 100vw;
+  min-height: 100dvh;
+  background-image: url("../public/tapete_fondo.png");
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 90px;
+
+  .picture-fournier {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 2;
+    width: 10vw;
+    max-width: 120px;
+    min-width: 100px;
+  }
 }
 
 .container-grid {
@@ -20,6 +37,7 @@ body {
     font-size: 24px;
     margin: 0px auto 32px;
     width: fit-content;
+    color: #eeeeee;
   }
 
   .wrapper-difficulty {
@@ -36,12 +54,74 @@ body {
     select {
       font-size: 14px;
     }
+
+    .custom-select {
+      position: relative;
+      user-select: none;
+      cursor: pointer;
+      width: 250px;
+      text-align: center;
+
+      .custom-select-trigger {
+        background: #3d1e2b;
+        border: 1px solid #3d1e2b;
+        padding: 10px 15px;
+        border-radius: 6px;
+        color: #eeeeee;
+        font-size: 1rem;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background-color: #772e4d;
+        }
+      }
+
+      .custom-options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid #3d1e2b;
+        border-top: none;
+        max-height: 180px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        border-radius: 6px;
+        text-align: center;
+
+        .custom-option {
+          padding: 10px 15px;
+          transition: background 0.2s ease;
+          text-align: center;
+          color: #282829;
+
+          &:first-child {
+            border-radius: 6px 6px 0 0;
+          }
+
+          &:last-child {
+            border-radius: 0 0 6px 6px;
+          }
+
+          &:hover {
+            background-color: #772e4d;
+            border: 1px solid #772e4d;
+            color: #eeeeee;
+          }
+        }
+      }
+    }
   }
 
   .fails-paragraph {
     margin: 0px auto 32px;
     font-size: 16px;
     width: fit-content;
+    color: #eeeeee;
   }
 
   .board-game {
@@ -106,15 +186,20 @@ body {
       }
 
       .card-front {
-        background-color: #1e90ff;
-        color: white;
-        transition: background-color 0.3s ease;
+        background-color: #3d1e2b;
+        color: #eeeeee;
+        transition: all 0.3s ease;
+        &:hover {
+          background-color: #2f0818;
+          box-shadow: 0px 3px 5px 0px #3d1e2b;
+        }
       }
 
       .card-back {
-        background-color: purple;
-        color: white;
+        background-color: #2f0818;
+        color: #eeeeee;
         transform: rotateY(180deg);
+        cursor: auto;
       }
 
       &.matched {
@@ -123,14 +208,8 @@ body {
         }
 
         .card-back {
-          background-color: #4caf50;
-          color: white;
-        }
-      }
-
-      &:hover {
-        .card-front {
-          background-color: #1565c0;
+          background-color: #2f081872;
+          color: #eeeeee;
         }
       }
     }
@@ -141,15 +220,16 @@ body {
     margin: 0 auto 32px;
     padding: 10px 20px;
     font-size: 14px;
-    background-color: #1e90ff;
+    background-color: #772e4d;
+    border: 1px solid #3d1e2b;
     color: white;
-    border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #1565c0;
+      background-color: #3d1e2b;
+      border: 1px solid #3d1e2b;
     }
   }
 }
@@ -172,6 +252,16 @@ body {
 }
 
 @media (max-width: 480px) {
+  body {
+    padding-top: 60px;
+    .picture-fournier {
+      position: absolute;
+      bottom: initial;
+      top: 30px;
+      right: 50%;
+      transform: translateX(50%);
+    }
+  }
   .container-grid {
     .board-game {
       &.size-8 {

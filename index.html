@@ -12,19 +12,21 @@
       <h1 class="title-game">Twins Cards</h1>
 
       <div class="wrapper-difficulty">
-        <label for="difficulty">Choose level:</label>
-        <select id="difficulty">
-          <option value="8">Easy (8 cards)</option>
-          <option value="16">Normal (16 cards)</option>
-          <option value="24">Hard (24 cards)</option>
-          <option value="32">Very Hard (32 cards)</option>
-        </select>
+        <label for="difficulty"></label>
+        <div class="custom-select" id="customSelect">
+          <div class="custom-select-trigger" id="customTrigger"></div>
+          <div class="custom-options" id="customOptions"></div>
+        </div>
+        <!-- Select real oculto (para compatibilidad) -->
+        <select id="difficulty" style="display: none"></select>
       </div>
 
       <p class="fails-paragraph" id="failures"></p>
 
       <div class="board-game" id="boardGame"></div>
     </div>
+
+    <img src="public/fournier.png" alt="fournier" title="fournier" class="picture-fournier"/>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="./scripts/script.js"></script>

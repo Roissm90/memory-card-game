@@ -4,6 +4,8 @@ $(document).ready(function () {
   let failures = 0;
   let currentSize = 6;
 
+  const flipDuration = 600; // Duración de la animación CSS
+
   function generateBoard(size) {
     currentSize = size;
     const $board = $("#boardGame");
@@ -15,16 +17,13 @@ $(document).ready(function () {
 
     createRestartButton();
 
-    // hacer las parejas
     let cardValues = [];
     for (let i = 1; i <= size / 2; i++) {
       cardValues.push(i, i);
     }
 
-    // aleatorizar posicion
     cardValues = cardValues.sort(() => 0.5 - Math.random());
 
-    // generar cartas
     cardValues.forEach((val) => {
       const $card = $(`
         <div class="card" data-value="${val}">
@@ -38,17 +37,25 @@ $(document).ready(function () {
     });
   }
 
-  function resetTurn() {
-    selectedCards.forEach(($c) => $c.removeClass("flipped"));
+  async function flipBackSelectedCards() {
+    for (let i = 0; i < selectedCards.length; i++) {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          selectedCards[i].removeClass("flipped");
+          resolve();
+        }, flipDuration / 1.5); // Retardo entre cartas para animar una a una
+      });
+    }
     selectedCards = [];
   }
 
   function createRestartButton() {
-    if ($("#restartButton").length > 0) return;
+    $("#restartButton").remove();
 
-    const $btn = $(
-      `<button id="restartButton" class="restart-button">Restart</button>`
-    );
+    const $btn = $(`
+      <button id="restartButton" class="restart-button">Restart</button>
+    `);
+
     $btn.insertAfter("#failures");
 
     $btn.on("click", function () {
@@ -58,10 +65,12 @@ $(document).ready(function () {
 
   $("#difficulty").on("change", function () {
     const size = parseInt($(this).val());
-    generateBoard(size);
+    if (!isNaN(size)) {
+      generateBoard(size);
+    }
   });
 
-  $("#boardGame").on("click", ".card", function () {
+  $("#boardGame").on("click", ".card", async function () {
     const $card = $(this);
 
     if (
@@ -80,27 +89,24 @@ $(document).ready(function () {
       const val2 = selectedCards[1].data("value");
 
       if (val1 === val2) {
-        // acierto
+        // Match
         selectedCards.forEach(($c) => $c.addClass("matched"));
         matchedCards.push(val1);
         selectedCards = [];
       } else {
-        // fallo
+        // Fail
         failures++;
-        setTimeout(() => {
-          $("#failures").text(`Fails: ${failures}`);
-        }, 1500);
+        $("#failures").text(`Fails: ${failures}`);
+
         $("#boardGame").addClass("disabled");
 
-        setTimeout(() => {
-          resetTurn();
-          $("#boardGame").removeClass("disabled");
-        }, 1000);
+        await flipBackSelectedCards();
+
+        $("#boardGame").removeClass("disabled");
       }
     }
   });
 
-  // generar tablero al cargar la página
-  const initialSize = parseInt($("#difficulty").val()) || 6;
+  const initialSize = parseInt($("#difficulty").val()) || 8;
   generateBoard(initialSize);
 });
