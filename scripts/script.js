@@ -74,6 +74,7 @@ $(document).ready(function () {
     }
   });
 
+  
   function playTwice(sound) {
     sound.currentTime = 0;
     sound.play();
