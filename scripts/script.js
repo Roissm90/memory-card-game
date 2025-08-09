@@ -4,7 +4,7 @@ $(document).ready(function () {
   let failures = 0;
   let currentSize = 6;
 
-  const flipDuration = 600; // Duración de la animación CSS
+  const flipDuration = 600;
 
   // Referencias a los sonidos
   const failSound = document.getElementById("failSound");
@@ -30,15 +30,25 @@ $(document).ready(function () {
 
     cardValues.forEach((val) => {
       const $card = $(`
-        <div class="card" data-value="${val}">
-          <div class="card-inner">
-            <div class="card-front">?</div>
-            <div class="card-back">${val}</div>
-          </div>
+      <div class="card" data-value="${val}">
+        <div class="card-inner">
+          <div class="card-front">?</div>
+          <div class="card-back">${val}</div>
         </div>
-      `);
+      </div>
+    `);
       $board.append($card);
     });
+
+    // --- Mostrar todas las cartas por 1 segundo ---
+    const $allCards = $board.find(".card");
+    setTimeout(() => {
+      $allCards.addClass("flipped");
+
+      setTimeout(() => {
+        $allCards.removeClass("flipped");
+      }, 1000); // Tiempo que se muestran descubiertas (1 segundo)
+    }, 100); // Pequeño retardo para que la animación de flip funcione
   }
 
   async function flipBackSelectedCards() {
@@ -74,7 +84,6 @@ $(document).ready(function () {
     }
   });
 
-  
   function playTwice(sound) {
     sound.currentTime = 0;
     sound.play();
