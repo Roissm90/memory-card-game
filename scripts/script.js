@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  console.log('hola');
   let selectedCards = [];
   let matchedCards = [];
   let failures = 0;
