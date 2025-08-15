@@ -230,13 +230,13 @@ body .picture-fournier {
     transform: translateX(50%);
   }
   .container-grid .board-game.size-8 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   .container-grid .board-game.size-16 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   .container-grid .board-game.size-24 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   .container-grid .board-game.size-32 {
     grid-template-columns: repeat(4, 1fr);
