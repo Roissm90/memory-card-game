@@ -214,11 +214,13 @@ body .picture-fournier {
   }
   .container-grid .board-game .card {
     aspect-ratio: 1/1.2;
+    max-width: 100px;
   }
 }
 @media (max-width: 480px) {
   body {
     padding-top: 60px;
+    padding-bottom: 0;
   }
   body .picture-fournier {
     position: absolute;
@@ -241,6 +243,7 @@ body .picture-fournier {
   }
   .container-grid .board-game .card {
     aspect-ratio: 1;
+    max-width: 60px;
   }
 }
 

@@ -246,6 +246,7 @@ body {
 
       .card {
         aspect-ratio: 1 / 1.2;
+        max-width: 100px;
       }
     }
   }
@@ -254,6 +255,7 @@ body {
 @media (max-width: 480px) {
   body {
     padding-top: 60px;
+    padding-bottom: 0;
     .picture-fournier {
       position: absolute;
       bottom: initial;
@@ -279,6 +281,7 @@ body {
 
       .card {
         aspect-ratio: 1;
+        max-width: 60px;
       }
     }
   }
